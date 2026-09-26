@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        getUserData().role == 'admin' ||
+        request.auth.token.email.matches('.*admin@nellaiassets\\.com')
+      );
+    }
+
+    // Public readable properties (only approved or own)
+    match /properties/{propId} {
+      allow read: if resource.data.status == 'approved' || 
+                  (isSignedIn() && resource.data.userId == request.auth.uid) || 
+                  isAdmin();
+      
+      // Authenticated users can create listings
+      allow create: if isSignedIn();
+
+      // Only owner or admin can update
+      allow update: if (isSignedIn() && resource.data.userId == request.auth.uid) || isAdmin();
+
+      // Only admin or owner can delete
+      allow delete: if (isSignedIn() && resource.data.userId == request.auth.uid) || isAdmin();
+    }
+
+    // Enquiries
+    match /enquiries/{enquiryId} {
+      allow create: if true; // Buyers can submit enquiry without mandatory login
+      allow read: if isSignedIn() && (
+        resource.data.sellerId == request.auth.uid ||
+        resource.data.buyerId == request.auth.uid ||
+        isAdmin()
+      );
+      allow update, delete: if isAdmin() || (isSignedIn() && resource.data.sellerId == request.auth.uid);
+    }
+
+    // Users
+    match /users/{userId} {
+      allow read: if true; // Public seller profiles are viewable
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Locations and Categories
+    match /locations/{locId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

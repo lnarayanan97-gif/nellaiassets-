@@ -1,0 +1,6 @@
+{
+  "name": "Nellai Assets - Real Estate Marketplace",
+  "description": "Your Assets Adviser - Discover residential plots, villas, apartments, agricultural lands, and commercial properties in Tirunelveli and Tamil Nadu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
