@@ -101,15 +101,19 @@ function MainApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (view === 'founder' || view === 'founder-profile' || view === 'founder/sundar-rajan-k') {
-      if (window.location.pathname !== '/founder/sundar-rajan-k') {
-        window.history.pushState(null, '', '/founder/sundar-rajan-k');
+      const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+      const founderPath = `${basePath}/founder/sundar-rajan-k`;
+      if (window.location.pathname !== founderPath) {
+        window.history.pushState(null, '', founderPath);
       }
       setActiveView('founder');
       return;
     }
 
-    if (window.location.pathname !== '/') {
-      window.history.pushState(null, '', '/');
+    const homePath = import.meta.env.BASE_URL || '/';
+    const cleanHome = homePath.replace(/\/$/, '');
+    if (window.location.pathname !== homePath && (cleanHome === '' || window.location.pathname !== cleanHome)) {
+      window.history.pushState(null, '', homePath);
     }
 
     if (view === 'browse') {

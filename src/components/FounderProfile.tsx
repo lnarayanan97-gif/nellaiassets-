@@ -100,7 +100,7 @@ export const FounderProfile: React.FC<FounderProfileProps> = ({ onBack, onNaviga
               {/* Responsive Portrait Container preserving exact photograph without distortion */}
               <div className="relative w-64 sm:w-72 md:w-80 aspect-3/4 rounded-2xl overflow-hidden shadow-lg border-2 border-white ring-1 ring-stone-200/60 bg-stone-100">
                 <img
-                  src="/assets/founder/sundar-rajan-k.jpeg"
+                  src={`${import.meta.env.BASE_URL}assets/founder/sundar-rajan-k.jpeg`}
                   alt="Sundar Rajan K - Founder, Nellai Assets"
                   className="w-full h-full object-cover object-top block founder-image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}

@@ -46,7 +46,7 @@ export const NellaiAssetsLogo: React.FC<NellaiAssetsLogoProps> = ({
       <div className={`${imgSizes[size]} shrink-0 rounded-full relative flex items-center justify-center overflow-hidden shadow-xs border border-[#D4AF37]/50 bg-[#FAFBF8]`}>
         {!imgError ? (
           <img
-            src="/assets/branding/nellai-assets-logo.png"
+            src={`${import.meta.env.BASE_URL}assets/branding/nellai-assets-logo.png`}
             alt="Nellai Assets Logo"
             className="w-full h-full object-contain rounded-full"
             onError={() => setImgError(true)}
@@ -54,7 +54,7 @@ export const NellaiAssetsLogo: React.FC<NellaiAssetsLogoProps> = ({
           />
         ) : (
           <img
-            src="/assets/branding/nellai-assets-logo.svg"
+            src={`${import.meta.env.BASE_URL}assets/branding/nellai-assets-logo.svg`}
             alt="Nellai Assets Logo"
             className="w-full h-full object-contain rounded-full"
             referrerPolicy="no-referrer"

@@ -32,7 +32,7 @@ export const FOUNDER_INFO: FounderData = {
   tagline: 'Your Assets Adviser for Tirunelveli Real Estate',
   location: 'Tirunelveli District, Tamil Nadu, India',
   // Official uploaded portrait photograph of Sundar Rajan K
-  photoUrl: '/assets/founder/sundar-rajan-k.jpeg',
+  photoUrl: `${import.meta.env.BASE_URL}assets/founder/sundar-rajan-k.jpeg`,
   intro: 'Helping buyers and property owners navigate the Tirunelveli real-estate market with local insight, property guidance and personalized assistance.',
   bio: [
     'Helping buyers and property owners navigate the Tirunelveli real-estate market with local insight, property guidance and personalized assistance.',

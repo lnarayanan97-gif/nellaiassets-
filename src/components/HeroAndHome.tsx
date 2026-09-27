@@ -313,7 +313,7 @@ export const HeroAndHome: React.FC<HeroAndHomeProps> = ({
             {/* Founder Photo */}
             <div className="lg:col-span-4 relative rounded-2xl overflow-hidden shadow-lg aspect-4/5 max-w-sm mx-auto lg:max-w-none bg-stone-100">
               <img
-                src="/assets/founder/sundar-rajan-k.jpeg"
+                src={`${import.meta.env.BASE_URL}assets/founder/sundar-rajan-k.jpeg`}
                 alt="Sundar Rajan K - Founder, Nellai Assets"
                 className="w-full h-full object-cover object-top block founder-image"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
